@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Front{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        p {
+            color: red;
+        }
+    </style>
+
+{% endblock %}
+
+{% block h1 %}{{ parent() }} Bonjour {{ prenomTwig }}{% endblock %}
+
+{% block body %}
+
+    {# 
+        commentaire HTML
+
+        {{}} => interpolation : fonctions twig et variables
+    #}
+
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, deserunt minima iste possimus nobis laudantium in dolorem aperiam consequuntur laborum, rem doloribus quibusdam necessitatibus voluptatem delectus neque deleniti et dolorum aliquid ducimus! Autem fugiat itaque omnis, mollitia nostrum, dicta corporis facere, inventore iure ea laboriosam facilis molestias placeat dolor. Expedita.</p>
+
+{% endblock %}
+
