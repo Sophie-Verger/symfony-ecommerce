@@ -21,6 +21,14 @@ class FrontController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/", name="home")
+     */
+    public function home():Response
+    {
+        return $this->render('front/home.html.twig');
+    }
+
 
 
 
