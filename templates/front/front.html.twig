@@ -11,7 +11,7 @@
 
 {% endblock %}
 
-{% block h1 %}{{ parent() }} Bonjour {{ prenomTwig }}{% endblock %}
+{% block h1 %}{{ parent() }} {{ prenomTwig }}{% endblock %}
 
 {% block body %}
 
@@ -20,6 +20,10 @@
 
         {{}} => interpolation : fonctions twig et variables
     #}
+
+    <div class="text-center m-3">
+        <img class="image" src="{{ asset('images/beach.jpg') }}" alt="">
+    </div>
 
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, deserunt minima iste possimus nobis laudantium in dolorem aperiam consequuntur laborum, rem doloribus quibusdam necessitatibus voluptatem delectus neque deleniti et dolorum aliquid ducimus! Autem fugiat itaque omnis, mollitia nostrum, dicta corporis facere, inventore iure ea laboriosam facilis molestias placeat dolor. Expedita.</p>
 

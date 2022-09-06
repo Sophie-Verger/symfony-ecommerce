@@ -16,11 +16,14 @@
 		<body>
                 {% include "_nav.html.twig" %}
 			
+            <div class="col-md-10 mx-auto">
 
-                <h1 class="text-center my-3 text-info">{% block h1 %}Titre{% endblock %}</h1>
-                
+                <h1 class="text-center my-3 text-info">{% block h1 %}Bonjour{% endblock %}</h1>
 
 				{% block body %}{% endblock %}
+
+            </div>
+
 
 
 				<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
