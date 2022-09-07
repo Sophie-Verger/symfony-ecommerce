@@ -2,3 +2,7 @@
 .image {
     width: 50%;
 }
+
+.text-justify {
+    text-align: justify;
+}

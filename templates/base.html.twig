@@ -10,7 +10,13 @@
 
         <link rel="stylesheet" href="{{ asset('css/style.css') }}"> 
         
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+			<style>
+				h1 {
+					color: #5C965F;
+				}
+			</style>
+		{% endblock %}
 
 		</head>
 		<body>
@@ -18,7 +24,7 @@
 			
             <div class="col-md-10 mx-auto">
 
-                <h1 class="text-center my-3 text-info">{% block h1 %}Bonjour{% endblock %}</h1>
+                <h1 class="text-center my-3 ">{% block h1 %}Bonjour{% endblock %}</h1>
 
 				{% block body %}{% endblock %}
 
