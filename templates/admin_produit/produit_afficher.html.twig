@@ -6,7 +6,22 @@
 {% block h1 %}Gestion des produits{% endblock %}
 
 {% block body %}
-    Afficher les produits
+    <a href="{{ path('produit_ajouter')}}" class="btn btn-success my-3">Ajouter un produit</a>
+
+    {% if produits %}
+        {% for produit in produits %}
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{{ produit.image ? produit.image : asset('images/beach.jpg') }}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{ produit.titre }}</h5>
+                    <p class="card-text">{{ produit.description }}</p>
+                    <p class="card-text">{{ produit.prix }}</p>
+                    <a href="{{ path('produit_modifier')}}" class="btn btn-primary">Modifier</a>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <h4 class="text-danger fst-italic mt-3 text-center">Il n'y a aucun produit</h4>    
+    {% endif %}
 
 {% endblock %}
-

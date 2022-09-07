@@ -3,10 +3,12 @@
 {% block title %}Ajouter un produit{% endblock %}
 
 
-{% block h1 %}Gestion des produits{% endblock %}
+{% block h1 %}Ajouter un produit{% endblock %}
 
 {% block body %}
-    Ajouter un produit    
+    <a href="{{ path('produit_afficher')}}" class="btn btn-warning my-3">Retour</a>
+    
+    {{ form(formProduit) }}  
 
 {% endblock %}
 
