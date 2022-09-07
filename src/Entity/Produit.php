@@ -5,34 +5,29 @@ namespace App\Entity;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/*
+/**
  * @ORM\Entity(repositoryClass=ProduitRepository::class)
  */
 class Produit
 {
-    /*
+    /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
 
-    /*
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $titre;
 
-    /*
+    /**
      * @ORM\Column(type="float", nullable=true)
      */
     private $prix;
 
-    /*
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $text;
-
-    /*
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
@@ -67,18 +62,6 @@ class Produit
     public function setPrix(?float $prix): self
     {
         $this->prix = $prix;
-
-        return $this;
-    }
-
-    public function getText(): ?string
-    {
-        return $this->text;
-    }
-
-    public function setText(?string $text): self
-    {
-        $this->text = $text;
 
         return $this;
     }
