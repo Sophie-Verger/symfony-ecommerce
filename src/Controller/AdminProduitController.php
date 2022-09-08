@@ -52,19 +52,43 @@ class AdminProduitController extends AbstractController
     }
 
     /**
-     * @Route("/admin/produit/modifier", name="produit_modifier")
+     * @Route("/admin/produit/modifier/{id}", name="produit_modifier")
      */
-    public function produitModifier(): Response
-    {
-        return $this->render('admin_produit/produit_modifier.html.twig');
+    public function produitModifier(Produit $produit, Request $request, ProduitRepository $repoProduit): Response
+    {        
+        $form = $this->createForm(ProduitType::class, $produit);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() AND $form->isValid()) {
+            // enregistrement en BDD
+            $repoProduit->add($produit, true);
+
+            // notification
+            $this->addFlash('success', 'Le produit a bien été modifié !');
+
+            // redirection
+            return $this->redirectToRoute('produit_afficher');
+        }
+
+        return $this->render('admin_produit/produit_modifier.html.twig', [
+            'formProduit' => $form->createView()
+        ]);
     }
 
     /**
-     * @Route("/admin/produit/supprimer", name="produit_supprimer")
+     * @Route("/admin/produit/supprimer/{id}", name="produit_supprimer")
      */
-    public function produitSupprimer(): Response
+    public function produitSupprimer(Produit $produit, ProduitRepository $repoProduit): Response
     {
-        return $this->render('admin_produit/produit_supprimer.html.twig');
+        //dd($produit);
+        $repoProduit->remove($produit, true);
+
+        // notification
+        $this->addFlash('success', 'Le produit a bien été supprimé !');
+
+        // redirection
+        return $this->redirectToRoute('produit_afficher');
     }
 
 

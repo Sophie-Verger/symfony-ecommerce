@@ -1,12 +1,27 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Modification d'un produit{% endblock %}
+{% block title %}Modifier un produit{% endblock %}
 
 
-{% block h1 %}Gestion des produits{% endblock %}
+{% block h1 %}Modifier un produit{% endblock %}
 
 {% block body %}
-    Modification d'un produit    
+    <a href="{{ path('produit_afficher')}}" class="btn btn-warning my-3">Retour</a>
+
+    <div class="col-md-10 mx-auto">
+        {{ form_start(formProduit) }}
+            {{form_row(formProduit.titre)}}
+
+            <div class="row my-3">
+                <div class="col-md-6">{{form_row(formProduit.image)}}</div>
+                <div class="col-md-6">{{form_row(formProduit.prix)}}</div>
+            </div>
+
+            {{form_rest(formProduit)}}
+
+        {{ form_end(formProduit) }}
+    </div>
+
 
 {% endblock %}
 

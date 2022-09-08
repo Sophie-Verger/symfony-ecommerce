@@ -10,7 +10,6 @@
     
     {# {{ form(formProduit) }} #}
 
-    {{ form_start(formProduit) }}
 
         {# il est possible de réordonner un champ
         {{form_help(formProduit.titre)}}
@@ -19,7 +18,8 @@
         {{form_errors(formProduit.titre)}}
         #}
     <div class="col-md-10 mx-auto">
-        {{form_row(formProduit.titre)}}
+        {{ form_start(formProduit) }}
+            {{form_row(formProduit.titre)}}
 
             <div class="row my-3">
                 <div class="col-md-6">{{form_row(formProduit.image)}}</div>
