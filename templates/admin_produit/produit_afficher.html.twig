@@ -6,6 +6,16 @@
 {% block h1 %}Gestion des produits{% endblock %}
 
 {% block body %}
+
+    {# Notification - flash message #}
+    {% for notification in app.flashes('success') %}
+        <div class="alert alert-success text-center col-md-10 mx-auto">
+            {{notification}}
+        </div>
+    {% endfor %}
+
+
+
     <a href="{{ path('produit_ajouter')}}" class="btn btn-success my-3">Ajouter un produit</a>
 
 
@@ -49,7 +59,7 @@
         <div class="d-flex flex-wrap">
             {% for produit in produits %}
                 <div class="card m-3" style="width: 18rem;">
-                    <img class="card-img-top" src="{{ asset(produit.image ? produit.image : '') }}" alt="Card image cap">
+                    <img class="card-img-top" src="{{ asset(produit.image ? produit.image : '/images/default.jpg') }}" alt="Card image cap">
                     <div class="card-body text-center">
                         <h5 class="card-title">{{ produit.titre }}</h5>
                         <p class="card-text">{{ produit.description }}</p>

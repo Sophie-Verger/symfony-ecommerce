@@ -39,6 +39,8 @@ class AdminProduitController extends AbstractController
             // enregistrement en BDD
             $repoProduit->add($produit, true);
 
+            // notification
+            $this->addFlash('success', 'Le produit a bien été ajouté !');
 
             // redirection
             return $this->redirectToRoute('produit_afficher');
