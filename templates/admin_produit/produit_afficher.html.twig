@@ -11,11 +11,11 @@
     {% if produits %}
         {% for produit in produits %}
             <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{{ produit.image ? produit.image : asset('images/beach.jpg') }}" alt="Card image cap">
+                <img class="card-img-top" src="{{ asset(produit.image ? produit.image : '') }}" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">{{ produit.titre }}</h5>
                     <p class="card-text">{{ produit.description }}</p>
-                    <p class="card-text">{{ produit.prix }}</p>
+                    <p class="card-text">{{ produit.prix }} €</p>
                     <a href="{{ path('produit_modifier')}}" class="btn btn-primary">Modifier</a>
                 </div>
             </div>
