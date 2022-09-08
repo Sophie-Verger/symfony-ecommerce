@@ -11,13 +11,15 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ProduitType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('titre', TextareaType::class, [
+            ->add('titre', TextType::class, [
                 "label" => 'Nom du produit *',
                 'attr' => [
                     "placeholder" => "saisissez le nom du produit",
@@ -34,6 +36,17 @@ class ProduitType extends AbstractType
                 'row_attr' => [
                     'class' => 'shadow p-2'
                 ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => '5 caractères max !!'
+                    ]),
+                    new Length([
+                        'min' => 5,
+                        'max' => 30,
+                        'minMessage' => '5 cractères minimum !!',
+                        'maxMessage' => '30 caratères max !!'
+                    ])
+                ]
             ])
             ->add('prix', MoneyType::class, [
                 'currency' => 'USD',
@@ -53,7 +66,7 @@ class ProduitType extends AbstractType
                     'class' => 'shadow p-2'
                 ],
             ])
-            ->add('description', TextType::class,[
+            ->add('description', TextAreaType::class,[
                 'required' => false,
                 "label" => 'Description du produit (facultatif)',
                 'attr' => [
@@ -72,7 +85,25 @@ class ProduitType extends AbstractType
                     'class' => 'shadow p-2'
                 ],
             ])
-            ->add('image')
+            ->add('image', TextType::class, [
+                'required' => false,
+                "label" => 'Image du produit (facultatif)',
+                'attr' => [
+                    "placeholder" => "saisissez l'image du produit",
+                    "class" => "border border-success border-2 rounded",
+                    'rows' => 5
+                ],
+                'help' => '200 caractères minimum',
+                'label_attr' => [
+                    'class' => 'text-info'
+                ],
+                'help_attr' => [
+                    'class' => 'text-success'
+                ],
+                'row_attr' => [
+                    'class' => 'shadow p-2'
+                ],
+            ])
             ->add('Ajouter', SubmitType::class)
         ;
     }

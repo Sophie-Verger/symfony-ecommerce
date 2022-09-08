@@ -8,18 +8,57 @@
 {% block body %}
     <a href="{{ path('produit_ajouter')}}" class="btn btn-success my-3">Ajouter un produit</a>
 
+
     {% if produits %}
-        {% for produit in produits %}
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{{ asset(produit.image ? produit.image : '') }}" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">{{ produit.titre }}</h5>
-                    <p class="card-text">{{ produit.description }}</p>
-                    <p class="card-text">{{ produit.prix }} €</p>
-                    <a href="{{ path('produit_modifier')}}" class="btn btn-primary">Modifier</a>
+        <div class="d-flex flex-wrap">
+            <table class="table table-striped text-center my-3">
+                <thead>
+                    <th>ID</th>
+                    <th>Titre</th>
+                    <th>Image</th>
+                    <th>Prix (€)</th>
+                    <th>Description</th>
+                    <th>Modifier</th>
+                    <th>Supprimer</th>
+                </thead>
+                <tbody>
+                    {% for produit in produits %}
+                        <tr class="align-middle">
+                            <td>{{ produit.id }}</td>
+                            <td>{{ produit.titre|capitalize }}</td>
+                            <td><img style='width:100px' class="" src="{{ asset(produit.image ? produit.image : '/images/default.jpg') }}" alt="Card image cap"></td>
+                            <td>{{ produit.prix }}</td>
+                            <td>
+                                {% if produit.description %}
+                                    {{produit.description}}
+                                {% else %}
+                                    <span class="text-danger fst-italic">N.R</span>
+                                {% endif %}
+                            </td>
+                            <td><i data-feather="edit" class="text-info"></i></td>
+                            <td><i data-feather="trash" class="text-danger"></i></td>
+                        </tr>
+            
+                    {% endfor %}
+                </tbody>
+
+
+
+            </table>
+        </div>
+        <div class="d-flex flex-wrap">
+            {% for produit in produits %}
+                <div class="card m-3" style="width: 18rem;">
+                    <img class="card-img-top" src="{{ asset(produit.image ? produit.image : '') }}" alt="Card image cap">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ produit.titre }}</h5>
+                        <p class="card-text">{{ produit.description }}</p>
+                        <p class="card-text">{{ produit.prix }} €</p>
+                        <a href="{{ path('produit_modifier')}}" class="btn btn-primary">Modifier</a>
+                    </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     {% else %}
         <h4 class="text-danger fst-italic mt-3 text-center">Il n'y a aucun produit</h4>    
     {% endif %}

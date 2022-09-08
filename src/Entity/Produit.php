@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\ProduitRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ProduitRepository;
 
 /**
  * @ORM\Entity(repositoryClass=ProduitRepository::class)
@@ -19,16 +20,29 @@ class Produit
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank(message="Veuillez saisir un titre")
+     * @Assert\Length(
+     * min=5,
+     * max=30,
+     * minMessage="Saisir au moins 5 caractères",
+     * maxMessage="Saisir moins de 30 caractères"
+     * )
      */
     private $titre;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Assert\NotBlank(message="Veuillez saisir un prix")
+     * @Assert\Positive(message="Veuillez saisir un prix supérieur à zéro")
      */
     private $prix;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Assert\Length(
+     * max=200,
+     * maxMessage="Saisir moins de 200 caractères"
+     * )
      */
     private $description;
 

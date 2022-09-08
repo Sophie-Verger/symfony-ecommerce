@@ -8,6 +8,7 @@ use App\Repository\ProduitRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 
 class AdminProduitController extends AbstractController
 {
@@ -26,11 +27,22 @@ class AdminProduitController extends AbstractController
     /**
      * @Route("/admin/produit/ajouter", name="produit_ajouter")
      */
-    public function produitAjouter(): Response
+    public function produitAjouter(Request $request, ProduitRepository $repoProduit): Response
     {
         $produit = new Produit;
 
         $form = $this->createForm(ProduitType::class, $produit);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() AND $form->isValid()) {
+            // enregistrement en BDD
+            $repoProduit->add($produit, true);
+
+
+            // redirection
+            return $this->redirectToRoute('produit_afficher');
+        }
         
         return $this->render('admin_produit/produit_ajouter.html.twig', [
             'formProduit' => $form->createView()
