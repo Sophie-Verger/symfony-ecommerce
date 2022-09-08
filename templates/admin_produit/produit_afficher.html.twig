@@ -58,20 +58,6 @@
 
             </table>
         </div>
-        <div class="d-flex flex-wrap">
-            {% for produit in produits %}
-                <div class="card m-3" style="width: 18rem;">
-                    <img class="card-img-top" src="{{ asset(produit.image ? produit.image : '/images/default.jpg') }}" alt="Card image cap">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">{{ produit.titre }}</h5>
-                        <p class="card-text">{{ produit.description }}</p>
-                        <p class="card-text">{{ produit.prix }} €</p>
-                        <a href="{{ path( 'produit_modifier', { 'id' : produit.id } ) }}" class="btn btn-warning">Modifier</a>
-                        <a href="{{ path( 'produit_supprimer', { 'id' : produit.id } ) }}" class="btn btn-danger">Supprimer</a>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
     {% else %}
         <h4 class="text-danger fst-italic mt-3 text-center">Il n'y a aucun produit</h4>    
     {% endif %}

@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Catalogue{% endblock %}
+
+
+{% block h1 %}Catalogue{% endblock %}
+
+{% block body %}
+
+    {% if produits %}
+        <div class="d-flex flex-wrap">
+            {% for produit in produits %}
+                <div class="card m-3" style="width: 18rem;">
+                    <img class="card-img-top" src="{{ asset(produit.image ? produit.image : '/images/default.jpg') }}" alt="Card image cap">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ produit.titre }}</h5>
+                        <p class="card-text">{{ produit.description }}</p>
+                        <p class="card-text">{{ produit.prix }} €</p>
+                        <a href="{{ path( 'fiche_produit', { 'id' : produit.id } ) }}" class="btn btn-info">Fiche produit</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <h4 class="text-danger fst-italic mt-3 text-center">Il n'y a aucun produit</h4>    
+    {% endif %}
+
+{% endblock %}

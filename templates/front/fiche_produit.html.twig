@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Catalogue{% endblock %}
+
+
+{% block h1 %}Catalogue{% endblock %}
+
+{% block body %}
+
+    <a href="{{ path('catalogue')}}" class="btn btn-warning my-3">Retour</a>
+
+    <div class="d-flex">
+        <img class="mx-3 w-50 card-img-top" src="{{ asset(produit.image ? produit.image : '/images/default.jpg') }}" alt="Card image cap">
+
+        <div class="mx-3 w-50">
+            <h5 class="">{{ produit.titre }}</h5>
+            <p class="">{{ produit.description }}</p>
+            <p class="">{{ produit.prix }} €</p>
+        </div>
+    </div>
+
+ 
+
+
+{% endblock %}
