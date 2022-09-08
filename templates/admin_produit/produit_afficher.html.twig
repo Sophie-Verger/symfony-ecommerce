@@ -45,7 +45,7 @@
                                     <span class="text-danger fst-italic">N.R</span>
                                 {% endif %}
                             </td>
-                            <td><a aria-current="page" href="{{ path('produit_modifier', { 'id' : produit.id }) }}"><i data-feather="edit" class="text-info"></i></a></td>
+                            <td><a aria-current="page" href="{{ path('produit_modifier', { 'id' : produit.id }) }}"><i data-feather="edit" class="text-warning"></i></a></td>
                             <td><a aria-current="page" href="{{ path('produit_supprimer', { 'id' : produit.id }) }}"
                             onClick="return confirm('êtes-vous sûr de vouloir supprimer ce produit ?')"
                             ><i data-feather="trash" class="text-danger"></i></a></td>
@@ -66,7 +66,8 @@
                         <h5 class="card-title">{{ produit.titre }}</h5>
                         <p class="card-text">{{ produit.description }}</p>
                         <p class="card-text">{{ produit.prix }} €</p>
-                        <a href="{{ path( 'produit_modifier', { 'id' : produit.id } ) }}" class="btn btn-primary">Modifier</a>
+                        <a href="{{ path( 'produit_modifier', { 'id' : produit.id } ) }}" class="btn btn-warning">Modifier</a>
+                        <a href="{{ path( 'produit_supprimer', { 'id' : produit.id } ) }}" class="btn btn-danger">Supprimer</a>
                     </div>
                 </div>
             {% endfor %}
