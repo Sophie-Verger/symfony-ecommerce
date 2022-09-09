@@ -2,11 +2,17 @@
 
 namespace App\Entity;
 
-use App\Repository\CategorieRepository;
+use Assert\NotBlank;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CategorieRepository;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=CategorieRepository::class)
+ * @UniqueEntity(
+ * fields=('nom),
+ * message="cette catégorie existe déjà")
+ * )
  */
 class Categorie
 {
@@ -19,6 +25,7 @@ class Categorie
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @NotBlank(message="Veuillez saisir un nom")
      */
     private $nom;
 

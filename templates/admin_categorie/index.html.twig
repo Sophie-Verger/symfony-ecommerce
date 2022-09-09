@@ -3,33 +3,43 @@
 {% block title %}Categorie index{% endblock %}
 
 {% block body %}
-    <h1>Categorie index</h1>
+    {# Notification - flash message #}
+    {% for notification in app.flashes('success') %}
+        <div class="alert alert-success text-center col-md-10 mx-auto">
+            {{notification}}
+        </div>
+    {% endfor %}
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for categorie in categories %}
-            <tr>
-                <td>{{ categorie.id }}</td>
-                <td>{{ categorie.nom }}</td>
-                <td>
-                    <a href="{{ path('app_admin_categorie_show', {'id': categorie.id}) }}">show</a>
-                    <a href="{{ path('app_admin_categorie_edit', {'id': categorie.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
-    <a href="{{ path('app_admin_categorie_new') }}">Create new</a>
+
+    <a href="{{ path('app_admin_categorie_new')}}" class="btn btn-success my-3">Ajouter une catégorie</a>
+
+
+    {% if categories %}
+        <div class="d-flex flex-wrap">
+            <table class="table table-striped text-center my-3">
+                <thead>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Modifier</th>
+                    <th>Supprimer</th>
+                </thead>
+                <tbody>
+                    {% for categorie in categories %}
+                        <tr class="align-middle">
+                            <td>{{ categorie.id }}</td>
+                            <td>{{ categorie.nom|capitalize }}</td>
+                            <td><a aria-current="page" href="{{ path('app_admin_categorie_edit', { 'id' : categorie.id }) }}"><i data-feather="edit" class="text-warning"></i></a></td>
+                            <td><a aria-current="page" href="{{ path('app_admin_categorie_delete', { 'id' : categorie.id }) }}"
+                            onClick="return confirm('êtes-vous sûr de vouloir supprimer cette catégorie ?')"
+                            ><i data-feather="trash" class="text-danger"></i></a></td>
+                        </tr>
+            
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <h4 class="text-danger fst-italic mt-3 text-center">Il n'y a aucune catégorie</h4>    
+    {% endif %}
 {% endblock %}
