@@ -77,14 +77,14 @@ class AdminCategorieController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_admin_categorie_delete", methods={"POST"})
+     * @Route("/{id}/delete", name="app_admin_categorie_delete")
      */
     public function delete(Request $request, Categorie $categorie, CategorieRepository $categorieRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$categorie->getId(), $request->request->get('_token'))) {
+        //if ($this->isCsrfTokenValid('delete'.$categorie->getId(), $request->request->get('_token'))) {
             $categorieRepository->remove($categorie, true);
-        }
+        //}
 
-        return $this->redirectToRoute('app_admin_categorie_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_admin_categorie_index');
     }
 }

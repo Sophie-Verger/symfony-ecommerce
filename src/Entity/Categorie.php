@@ -2,17 +2,14 @@
 
 namespace App\Entity;
 
-use Assert\NotBlank;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CategorieRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=CategorieRepository::class)
- * @UniqueEntity(
- * fields=('nom),
- * message="cette catégorie existe déjà")
- * )
  */
 class Categorie
 {
@@ -25,9 +22,20 @@ class Categorie
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @NotBlank(message="Veuillez saisir un nom")
+     * @Assert\NotBlank(message="Veuillez saisir un nom")
      */
     private $nom;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Produit::class, mappedBy="categorie")
+     */
+    private $produits;
+
+    public function __construct()
+    {
+        $this->produits = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -45,4 +53,35 @@ class Categorie
 
         return $this;
     }
+
+    /**
+     * Get the value of produits
+     */ 
+    public function getProduits()
+    {
+        return $this->produits;
+    }
+
+
+    public function addProduit(Produit $produit):self
+    {
+        if (!$this->produits->contains($produit)) {
+            $this->produits[] = $produit;
+            $produit->setCategorie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduit(Produit $produit):self
+    {
+        if ($this->produits->removeElement($produit)) {
+            if ($produit->getCategorie() === $this) {
+                $produit->setCategorie(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

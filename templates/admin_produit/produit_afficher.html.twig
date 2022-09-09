@@ -26,6 +26,7 @@
                     <th>ID</th>
                     <th>Titre</th>
                     <th>Image</th>
+                    <th>Catégorie</th>
                     <th>Prix (€)</th>
                     <th>Description</th>
                     <th>Modifier</th>
@@ -37,6 +38,7 @@
                             <td>{{ produit.id }}</td>
                             <td>{{ produit.titre|capitalize }}</td>
                             <td><img style='width:100px' class="" src="{{ asset(produit.image ? produit.image : '/images/default.jpg') }}" alt="Card image cap"></td>
+                            <td>{{ produit.categorie ? produit.categorie.nom|capitalize : '' }}</td>
                             <td>{{ produit.prix }}</td>
                             <td>
                                 {% if produit.description %}
@@ -45,10 +47,13 @@
                                     <span class="text-danger fst-italic">N.R</span>
                                 {% endif %}
                             </td>
-                            <td><a aria-current="page" href="{{ path('produit_modifier', { 'id' : produit.id }) }}"><i data-feather="edit" class="text-warning"></i></a></td>
-                            <td><a aria-current="page" href="{{ path('produit_supprimer', { 'id' : produit.id }) }}"
-                            onClick="return confirm('êtes-vous sûr de vouloir supprimer ce produit ?')"
-                            ><i data-feather="trash" class="text-danger"></i></a></td>
+                            <td>
+                                <a aria-current="page" href="{{ path('produit_modifier', { 'id' : produit.id }) }}"><i data-feather="edit" class="text-warning"></i></a>
+                            </td>
+                            <td>
+                                <a aria-current="page" href="{{ path('produit_supprimer', { 'id' : produit.id }) }}" onClick="return confirm('êtes-vous sûr de vouloir supprimer ce produit ?')"
+                            ><i data-feather="trash" class="text-danger"></i></a>
+                            </td>
                         </tr>
             
                     {% endfor %}

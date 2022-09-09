@@ -51,6 +51,12 @@ class Produit
      */
     private $image;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="produits")
+     * @Assert\NotBlank(message="Veuillez saisir une catégorie")
+     */
+    private $categorie;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -100,6 +106,26 @@ class Produit
     public function setImage(?string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of categorie
+     */ 
+    public function getCategorie()
+    {
+        return $this->categorie;
+    }
+
+    /**
+     * Set the value of categorie
+     *
+     * @return  self
+     */ 
+    public function setCategorie($categorie)
+    {
+        $this->categorie = $categorie;
 
         return $this;
     }

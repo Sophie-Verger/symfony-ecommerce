@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Categorie;
 use App\Entity\Produit;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
@@ -104,7 +106,24 @@ class ProduitType extends AbstractType
                     'class' => 'shadow p-2'
                 ],
             ])
-            ->add('Ajouter', SubmitType::class)
+            ->add('categorie', EntityType::class, [ // sera une relation avec une autre entité
+                "class" => Categorie::class, // quelle entité
+                "choice_label" => "nom", // quelle propriété
+                "label" => 'Nom de la cétégorie',
+                "placeholder" => "saisir une catégorie",
+                'label_attr' => [
+                    'id' => 'label_titre',
+                    'class' => 'text-success'
+                ],
+                'help_attr' => [
+                    'class' => 'text-warning'
+                ],
+                'row_attr' => [
+                    'class' => 'shadow p-2'
+                ],
+                'required' => false,
+            ])
+            //->add('Envoyer', SubmitType::class)
         ;
     }
 

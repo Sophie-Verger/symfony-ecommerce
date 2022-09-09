@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Matiere index{% endblock %}
+
+{% block body %}
+    <h1>Matiere index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for matiere in matieres %}
+            <tr>
+                <td>{{ matiere.id }}</td>
+                <td>{{ matiere.nom }}</td>
+                <td>
+                    <a href="{{ path('app_admin_matiere_show', {'id': matiere.id}) }}">show</a>
+                    <a href="{{ path('app_admin_matiere_edit', {'id': matiere.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_matiere_new') }}">Create new</a>
+{% endblock %}
